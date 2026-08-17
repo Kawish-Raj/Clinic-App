@@ -1,10 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
+import {supabase} from "./components/supabase";
 
-const SUPABASE_URL = 'https://qiabcdpgczndotliyyxm.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_r_f_YsI0lqf0m8xr9uZO9Q_MweADSWC';
-
-// Full VS Code autocomplete activates automatically on 'supabase'
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const login_form = document.querySelector("#login-form");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
@@ -28,7 +23,9 @@ async function signIn(email, password) {
     if (error) {
         alert(error.message);
     } else {
-        window.location.href = "pages/dashboard.html";
+        // email.value = "";
+        // password.value = "";
+        window.location.href = "/dashboard.html";
     }
 }
 

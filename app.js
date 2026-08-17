@@ -1,17 +1,28 @@
-import {supabase} from "./components/supabase";
+import { supabase } from "./components/supabase";
 
-const login_form = document.querySelector("#login-form");
-const email = document.querySelector("#email");
-const password = document.querySelector("#password");
+async function initLogin() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+        window.location.href = "/dashboard.html";
+        return;
+    }
+    document.body.style.display = "block";
 
-login_form.addEventListener('submit', (event) => {
-    event.preventDefault();
+    const login_form = document.querySelector("#login-form");
+    const email = document.querySelector("#email");
+    const password = document.querySelector("#password");
 
-    console.log("email: " + email.value);
-    console.log("password: " + password.value);
+    login_form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    signIn(email.value, password.value);
-});
+        console.log("email: " + email.value);
+        console.log("password: " + password.value);
+
+        signIn(email.value, password.value);
+    });
+}
+
+initLogin();
 
 async function signIn(email, password) {
 
@@ -23,8 +34,6 @@ async function signIn(email, password) {
     if (error) {
         alert(error.message);
     } else {
-        // email.value = "";
-        // password.value = "";
         window.location.href = "/dashboard.html";
     }
 }

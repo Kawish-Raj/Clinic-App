@@ -12,3 +12,14 @@ async function initDashboard(){
 };
 
 initDashboard();
+
+// Detect if the page was loaded from the browser's Back/Forward cache
+window.addEventListener('pageshow', (event) => {
+    // event.persisted is true if the page is restored from cache
+    if (event.persisted) {
+        // Force the browser to reload the page from scratch. 
+        // This makes the page hide the body and re-run initDashboard()
+        document.body.style.display = "none";
+        window.location.reload();
+    }
+});

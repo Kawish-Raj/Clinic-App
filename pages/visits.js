@@ -1,5 +1,6 @@
 import { supabase } from "../components/supabase";
 import { tableComp } from "../components/table";
+import { registrationCardContainer } from "../components/registrationCard";
 
 const contentContainer = document.querySelector("#app-content");
 const PATIENT_TABLE_HEADINGS = ["Case No","First Name","Last Name","Mobile Number","Age","Husband/Father"];
@@ -8,14 +9,16 @@ const PATIENT_TABLE_KEYS = ["case_no","first_name","last_name","mobile_number","
 const patientTableContainer = document.createElement("div");
 patientTableContainer.id = "patient-visit-table";
 
+
 let cachedData = null;
 
 export async function renderVisits(){
     contentContainer.replaceChildren();
-    contentContainer.append(patientTableContainer);
+    contentContainer.append(registrationCardContainer,patientTableContainer);
     await displayTodayPatient();
     
 };
+
 
 async function displayTodayPatient(){
     
@@ -41,4 +44,6 @@ async function displayTodayPatient(){
 
     patientTableContainer.innerHTML = tableComp(cachedData,PATIENT_TABLE_HEADINGS,PATIENT_TABLE_KEYS);
 }
+
+
 

@@ -1,11 +1,11 @@
 import { supabase } from "../components/supabase";
 import { tableComp } from "../components/table";
-import { registrationCardContainer } from "../components/registrationCard";
+import { registrationCardContainer,formValidation } from "../components/registrationCard";
 
 const contentContainer = document.querySelector("#app-content");
 const PATIENT_TABLE_HEADINGS = ["Case No","First Name","Last Name","Mobile Number","Age","Husband/Father"];
 const PATIENT_TABLE_KEYS = ["case_no","first_name","last_name","mobile_number","age","address","husband_father"];
-
+const resgistrationForm = registrationCardContainer.querySelector("#registration-form");
 const patientTableContainer = document.createElement("div");
 patientTableContainer.id = "patient-visit-table";
 
@@ -15,9 +15,17 @@ let cachedData = null;
 export async function renderVisits(){
     contentContainer.replaceChildren();
     contentContainer.append(registrationCardContainer,patientTableContainer);
+    displayRegistrationCard();
     await displayTodayPatient();
     
 };
+
+function displayRegistrationCard(){
+    resgistrationForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        formValidation();
+    })
+}
 
 
 async function displayTodayPatient(){

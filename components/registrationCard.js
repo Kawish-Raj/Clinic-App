@@ -22,6 +22,10 @@ registrationCardContainer.innerHTML =
                 <input type="number" id="age" placeholder="Age" required>
             </div>
             <div id="age-error-message" style="display: none;">Invalid Age</div>
+            <div id="address-container" class="input-container">
+                <label for="address">Address</label>
+                <input type="text" id="address" placeholder="Address" required>
+            </div>
             <div id="husband-father-container" class="input-container">
                 <label for="husband-father">Husband/Father</label>
                 <input type="text" id="husband-father" placeholder="Husband/Father" required>
@@ -36,6 +40,7 @@ const {
     'last-name': lastName,
     'mobile-number': mobileNumber,
     age,
+    address,
     'husband-father': husbandFather
 } = registrationForm.elements;
 const mobileErrorMessage = registrationCardContainer.querySelector("#mobile-error-message");
@@ -62,7 +67,7 @@ function formValidation(){
     } else {
         ageErrorMessage.style.display = "none";
     }
-    return validationStatus;
+    return [validationStatus,[firstName.value,lastName.value,mobileNumber.value,age.value,address.value,husbandFather.value]];
 
 };
 

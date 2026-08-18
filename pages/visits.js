@@ -1,6 +1,9 @@
 import { supabase } from "../components/supabase";
+import { tableComp } from "../components/table";
 
 const contentContainer = document.querySelector("#app-content");
+const PATIENT_TABLE_HEADINGS = ["Case No","First Name","Last Name","Mobile Number","Age","Husband/Father"];
+const PATIENT_TABLE_KEYS = ["case_no","first_name","last_name","mobile_number","age","address","husband_father"];
 
 export async function renderVisits(){
     contentContainer.innerHTML = "<h2>Loding...</h2>";
@@ -16,32 +19,8 @@ export async function renderVisits(){
         return;
     }
 
+    console.log(data);
     // Use backticks `` and target a specific column property (e.g., .name)
-    contentContainer.innerHTML = `<table>
-                                    ${tableHeadings}
-                                    ${data.map((patient)=>{ 
-                                        console.log(patient);
-                                        return(
-                                        `<tr>
-                                            <td> ${patient.case_no} </td>
-                                            <td> ${patient.first_name} </td>
-                                            <td> ${patient.last_name} </td>
-                                            <td> ${patient.mobile_number} </td>
-                                            <td> ${patient.age} </td>
-                                            <td> ${patient.address} </td>
-                                            <td> ${patient.husband_father} </td>
-                                        </tr>
-                                            `)
-                                    })}
-                                </table>`;
+    contentContainer.innerHTML = tableComp(data,PATIENT_TABLE_HEADINGS,PATIENT_TABLE_KEYS);
 };
 
-const tableHeadings = `<tr> 
-                            <th> Case No. </th>
-                            <th> First Name</th>
-                            <th> Last Name</th>
-                            <th> Mobile Number</th>
-                            <th> Age </th>
-                            <th> Address </th>
-                            <th> Husband/Father </th>
-                        </tr>`

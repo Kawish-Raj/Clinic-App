@@ -29,6 +29,9 @@ let cachedData = null;
 let tableJustUpdated = false;
 
 registrationForm.querySelector('form').addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
+// Listen for clicks anywhere inside the patient table container
+patientTableContainer.addEventListener('click', async (e) => await handleDeleteRow(e));
+
 
 async function renderVisits() {
     contentContainer.replaceChildren();
@@ -90,6 +93,46 @@ async function handleLoginFormSubmission(e) {
             await displayTodayPatient();
         }
     }
+}
+
+async function handleDeleteRow(e){
+    
+    // Check if the clicked element has the 'delete-button' class
+    if (e.target.classList.contains('delete-button')) {
+        
+        // Extract the ID from the data-id attribute we added in step 1
+        const patientId = e.target.getAttribute('data-id');
+        
+        // Optional: Add a confirmation dialog so users don't delete by accident
+        const confirmDelete = confirm(`Are you sure you want to delete Case No: ${patientId}?`);
+        
+        if (confirmDelete) {
+            // Disable the button temporarily to prevent double-clicks while deleting
+            e.target.disabled = true;
+            e.target.innerText = "Deleting...";
+            
+            await deletePatient(patientId);
+        }
+    }
+
+}
+
+async function deletePatient(patientId) {
+    // 1. Delete from Supabase (assuming 'case_no' is your primary key column)
+    const { error } = await supabase
+        .from('patients')
+        .delete()
+        .eq('case_no', patientId);
+
+    if (error) {
+        console.error("Delete Error:", error);
+        alert("Failed to delete patient: " + error.message);
+        return;
+    }
+
+    // 2. Force the table to fetch fresh data and re-render
+    tableJustUpdated = true;
+    await displayTodayPatient();
 }
 
 function validateRegistration() {

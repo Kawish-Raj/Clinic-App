@@ -19,7 +19,7 @@ export function tableComp(tableData,headings,fields,addDeleteButton=false,unique
                                 )
                                 
                             }).join('')}
-                        ${addDeleteButton ? `<td><button class="delete-button data-id="${data[uniqueIdentifier]}>Delete</button></td>`:""}
+                        ${addDeleteButton ? `<td><button class="delete-button" data-id="${data[uniqueIdentifier]}">Delete</button></td>`:""}
                     </tr>`
                 )
             }).join('')}

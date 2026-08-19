@@ -1,4 +1,4 @@
-export function tableComp(tableData,headings,keys){
+export function tableComp(tableData,headings,keys,addDeleteButton=false,uniqueIdentifier=null){
     const tableDataKeys = [...tableData.keys()]
     return (
         `<table>
@@ -20,6 +20,7 @@ export function tableComp(tableData,headings,keys){
                                 )
                                 
                             }).join('')}
+                        ${addDeleteButton ? `<td><button class="delete-button data-id="${tableData[row][uniqueIdentifier]}>Delete</button></td>`:""}
                     </tr>`
                 )
             }).join('')}

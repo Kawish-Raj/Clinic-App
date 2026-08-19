@@ -1,5 +1,4 @@
-export function tableComp(tableData,headings,keys,addDeleteButton=false,uniqueIdentifier=null){
-    const tableDataKeys = [...tableData.keys()]
+export function tableComp(tableData,headings,fields,addDeleteButton=false,uniqueIdentifier=null){
     return (
         `<table>
 
@@ -11,16 +10,16 @@ export function tableComp(tableData,headings,keys,addDeleteButton=false,uniqueId
 
 
 
-            ${tableDataKeys.map((row)=>{
+            ${Object.entries(tableData).map(([index,data])=>{
                 return(
                     `<tr>
-                        ${keys.map((key)=>{
+                        ${fields.map((field)=>{
                                 return(
-                                    `<td>${tableData[row][key]}</td>`
+                                    `<td>${data[field.id]}</td>`
                                 )
                                 
                             }).join('')}
-                        ${addDeleteButton ? `<td><button class="delete-button data-id="${tableData[row][uniqueIdentifier]}>Delete</button></td>`:""}
+                        ${addDeleteButton ? `<td><button class="delete-button data-id="${data[uniqueIdentifier]}>Delete</button></td>`:""}
                     </tr>`
                 )
             }).join('')}

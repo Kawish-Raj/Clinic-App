@@ -34,26 +34,8 @@ function formComp(fields, formName = "") {
 // const ageErrorMessage = registrationCardContainer.querySelector('#age-error-message');
 
 // function formValidation(){
-//     let validationStatus = true;
-//     if(mobileNumber.value < 0){
-//         mobileErrorMessage.innerText = "Mobile Number cannot be a negative value";
-//         mobileErrorMessage.style.display = "block";
-//         validationStatus = false;
-//     } else if(mobileNumber.value > 9999999999 || mobileNumber.value < 1000000000 ){
-//         mobileErrorMessage.innerText = "Mobile Number needs to be 10 digits";
-//         mobileErrorMessage.style.display = "block";
-//         validationStatus = false;
-//     } else {
-//         mobileErrorMessage.style.display = "none";
-//     }
-
-//     if(age.value < 1 || age.value > 99 ){
-//         ageErrorMessage.innerText = "Age needs to be between 0 and 100";
-//         ageErrorMessage.style.display = "block";
-//         validationStatus = false;
-//     } else {
-//         ageErrorMessage.style.display = "none";
-//     }
+//     
+//     
 //     return [validationStatus,[firstName.value,lastName.value,mobileNumber.value,age.value,address.value,husbandFather.value]];
 
 // };

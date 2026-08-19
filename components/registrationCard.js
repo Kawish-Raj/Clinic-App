@@ -1,4 +1,4 @@
-import { registrationCardContainer } from "../pages/visits";
+// import { registrationCardContainer } from "../pages/visits";
 
 function formComp(fields, formName = "") {
     return `

@@ -16,12 +16,17 @@ const PATIENT_FIELDS = [
 const contentContainer = document.querySelector("#app-content");
 const registrationCardContainer = document.createElement("div");
 registrationCardContainer.id = "registration-card-container";
-const resgistrationForm = registrationCardContainer.querySelector("#registration-form");
+const registrationForm = document.createElement("div");
+registrationForm.id = "registration-form-container";
+registrationForm.innerHTML = formComp(PATIENT_FIELDS,"registration");
+
 const patientTableContainer = document.createElement("div");
 patientTableContainer.id = "patient-visit-table";
 
 let cachedData = null;
 let tableJustUpdated = false;
+
+registrationForm.querySelector('form').addEventListener('submit',async (e)=>await handleLoginFormSubmission(e));
 
 async function renderVisits(){
     contentContainer.replaceChildren();
@@ -33,28 +38,7 @@ async function renderVisits(){
 
 
 function displayRegistrationCard(){
-    registrationCardContainer.innerHTML=formComp(PATIENT_FIELDS,"registration");
-    // resgistrationForm.addEventListener('submit',async (e)=>{
-    //     e.preventDefault();
-    //     const [status,values]=formValidation();
-    //     if(status){
-    //         const {error} = await supabase.from('patients').insert({
-    //             first_name:values[0],
-    //             last_name:values[1],
-    //             mobile_number:values[2],
-    //             age:values[3],
-    //             address:values[4],
-    //             husband_father:values[5]
-    //         })
-    //         if(error){
-    //             console.log(values);
-    //             alert(error.message);
-    //         } else{
-    //             tableJustUpdated = true;
-    //             await displayTodayPatient();
-    //         }
-    //     }
-    // })
+    registrationCardContainer.append(registrationForm);
 }
 
 
@@ -82,6 +66,28 @@ async function displayTodayPatient(){
     
 
     patientTableContainer.innerHTML = tableComp(cachedData,PATIENT_TABLE_HEADINGS,PATIENT_TABLE_KEYS,true,PATIENT_TABLE_KEYS[0]);
+}
+
+async function handleLoginFormSubmission(e){
+        e.preventDefault();
+        // const [status,values]=formValidation();
+        // if(status){
+        //     const {error} = await supabase.from('patients').insert({
+        //         first_name:values[0],
+        //         last_name:values[1],
+        //         mobile_number:values[2],
+        //         age:values[3],
+        //         address:values[4],
+        //         husband_father:values[5]
+        //     })
+        //     if(error){
+        //         console.log(values);
+        //         alert(error.message);
+        //     } else{
+        //         tableJustUpdated = true;
+        //         await displayTodayPatient();
+        //     }
+        // }
 }
 
 export {renderVisits,registrationCardContainer};

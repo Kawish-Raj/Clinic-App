@@ -1,4 +1,5 @@
 import { supabase } from "./components/supabase";
+import './index.css';
 
 const login_form = document.querySelector("#login-form");
 const email = document.querySelector("#email");

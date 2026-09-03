@@ -1,4 +1,4 @@
-export function tableComp(tableData,headings,fields,addDeleteButton=false,uniqueIdentifier=null){
+export function TABLE_COMP(tableData,headings,fields,addDeleteButton=false,uniqueIdentifier=null){
     return (
         `<table>
 

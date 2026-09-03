@@ -1,6 +1,6 @@
 import { supabase } from "../components/supabase";
-import { tableComp } from "../components/table";
-import { formComp } from "../components/registrationCard";
+import { TABLE_COMP } from "../components/table";
+import { FORM_COMP } from "../components/registrationCard";
 
 const PATIENT_TABLE_HEADINGS = ["Case No", "First Name", "Last Name", "Mobile Number", "Age", "Address", "Husband/Father"];
 const UNIQUE_IDENTIFIER = "case_no";
@@ -20,7 +20,7 @@ const registrationCardContainer = document.createElement("div");
 registrationCardContainer.id = "registration-card-container";
 const registrationForm = document.createElement("div");
 registrationForm.id = "registration-form-container";
-registrationForm.innerHTML = formComp(PATIENT_FIELDS, "registration");
+registrationForm.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration");
 
 const patientTableContainer = document.createElement("div");
 patientTableContainer.id = "patient-visit-table";
@@ -33,7 +33,7 @@ registrationForm.querySelector('form').addEventListener('submit', async (e) => a
 patientTableContainer.addEventListener('click', async (e) => await handleDeleteRow(e));
 
 
-async function renderVisits() {
+async function __Visits__() {
     contentContainer.replaceChildren();
     contentContainer.append(registrationCardContainer, patientTableContainer);
     displayRegistrationCard();
@@ -70,7 +70,7 @@ async function displayTodayPatient() {
 
 
 
-    patientTableContainer.innerHTML = tableComp(cachedData, PATIENT_TABLE_HEADINGS, PATIENT_FIELDS, true, UNIQUE_IDENTIFIER);
+    patientTableContainer.innerHTML = TABLE_COMP(cachedData, PATIENT_TABLE_HEADINGS, PATIENT_FIELDS, true, UNIQUE_IDENTIFIER);
 }
 
 async function handleLoginFormSubmission(e) {
@@ -166,5 +166,5 @@ function validateRegistration() {
     return validationStatus;
 }
 
-export { renderVisits, UNIQUE_IDENTIFIER };
+export { __Visits__, UNIQUE_IDENTIFIER };
 

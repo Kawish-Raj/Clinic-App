@@ -1,11 +1,11 @@
-import {supabase} from "./supabase";
-import { renderVisits } from "../pages/visits";
+import {supabase} from "../components/supabase";
+import { __Visits__ } from "../pages/visits";
 
 const contentContainer = document.querySelector("#app-content");
 
-export async function initNavBarComp(){
+export async function __navBar__(){
     document.querySelector("#nav-visits").addEventListener('click', () => {
-        renderVisits();
+        __Visits__();
     })
 
     document.querySelector("#nav-admission").addEventListener('click', () => {

@@ -1,6 +1,7 @@
-import { supabase } from "../components/supabase";
-import { TABLE_COMP } from "../components/table";
-import { FORM_COMP } from "../components/registrationCard";
+import { supabase } from "../../components/supabase";
+import { TABLE_COMP } from "../../components/table";
+// import  FORM_COMP  from "../../components/registrationCard";
+import __registrationForm__ from "./sections/registrationForm";
 
 const PATIENT_TABLE_HEADINGS = ["Case No", "First Name", "Last Name", "Mobile Number", "Age", "Address", "Husband/Father"];
 const UNIQUE_IDENTIFIER = "case_no";
@@ -15,12 +16,11 @@ const PATIENT_FIELDS = [
 ];
 const VALIDATION_FIELDS = ["age", "mobile_number"];
 
-const contentContainer = document.querySelector("#app-content");
-const registrationCardContainer = document.createElement("div");
-registrationCardContainer.id = "registration-card-container";
-const registrationForm = document.createElement("div");
-registrationForm.id = "registration-form-container";
-registrationForm.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration");
+const registrationFormContainer = document.createElement("div");
+registrationFormContainer.id = "registration-card-container";
+// const registrationForm = document.createElement("div");
+// registrationForm.id = "registration-form-container";
+// registrationForm.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration");
 
 const patientTableContainer = document.createElement("div");
 patientTableContainer.id = "patient-visit-table";
@@ -28,23 +28,24 @@ patientTableContainer.id = "patient-visit-table";
 let cachedData = null;
 let tableJustUpdated = false;
 
-registrationForm.querySelector('form').addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
+// registrationForm.querySelector('form').addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
 // Listen for clicks anywhere inside the patient table container
 patientTableContainer.addEventListener('click', async (e) => await handleDeleteRow(e));
 
 
-async function __Visits__() {
+async function __Visits__(contentContainer) {
     contentContainer.replaceChildren();
-    contentContainer.append(registrationCardContainer, patientTableContainer);
-    displayRegistrationCard();
+    contentContainer.append(registrationFormContainer, patientTableContainer);
+    // displayRegistrationCard();
+    __registrationForm__(registrationFormContainer);
     await displayTodayPatient();
 };
 
 
 
-function displayRegistrationCard() {
-    registrationCardContainer.append(registrationForm);
-}
+// function displayRegistrationCard() {
+//     registrationCardContainer.append(registrationForm);
+// }
 
 
 async function displayTodayPatient() {

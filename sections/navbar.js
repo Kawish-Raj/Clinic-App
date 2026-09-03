@@ -1,11 +1,11 @@
 import {supabase} from "../components/supabase";
-import { __Visits__ } from "../pages/visits";
+import { __Visits__ } from "../pages/visits/visits";
 
 const contentContainer = document.querySelector("#app-content");
 
 export async function __navBar__(){
     document.querySelector("#nav-visits").addEventListener('click', () => {
-        __Visits__();
+        __Visits__(contentContainer);
     })
 
     document.querySelector("#nav-admission").addEventListener('click', () => {

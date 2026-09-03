@@ -1,6 +1,4 @@
-import { UNIQUE_IDENTIFIER } from "../pages/visits";
-
-function FORM_COMP(fields, formName = "") {
+export default function FORM_COMP(fields, formName = "",UNIQUE_IDENTIFIER) {
     return `
         <form id="${formName}-form">
             ${fields.map(field => `
@@ -21,4 +19,3 @@ function FORM_COMP(fields, formName = "") {
         </form>
     `;
 }
-export {FORM_COMP};

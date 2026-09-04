@@ -7,10 +7,6 @@ const registrationFormContainer = document.createElement("div");
 registrationFormContainer.id = "registration-card-container";
 registrationFormContainer.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration", UNIQUE_IDENTIFIER).trim();
 
-// 1. Get direct reference to the form in memory
-// const registrationForm = template.content.firstElementChild;
-
-// 2. Attach submit handler directly to the element instance
 registrationFormContainer.addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
 
 export default function __registrationForm__(contentContainer){

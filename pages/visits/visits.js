@@ -2,11 +2,11 @@ import { supabase } from "../../database_helpers/supabase";
 import { TABLE_COMP } from "../../components/table";
 // import  FORM_COMP  from "../../components/registrationCard";
 import __registrationForm__ from "./sections/registrationForm";
-import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, PATIENT_TABLE_HEADINGS } from "../../database_helpers/patients_table";
+import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, PATIENT_TABLE_HEADINGS, state } from "./helpers";
 // const VALIDATION_FIELDS = ["age", "mobile_number"];
 
-const registrationFormContainer = document.createElement("div");
-registrationFormContainer.id = "registration-card-container";
+// const registrationFormContainer = document.createElement("div");
+// registrationFormContainer.id = "registration-card-container";
 // const registrationForm = document.createElement("div");
 // registrationForm.id = "registration-form-container";
 // registrationForm.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration");
@@ -15,7 +15,7 @@ const patientTableContainer = document.createElement("div");
 patientTableContainer.id = "patient-visit-table";
 
 let cachedData = null;
-let tableJustUpdated = false;
+// let state.tableJustUpdated = false;
 
 // registrationForm.querySelector('form').addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
 // Listen for clicks anywhere inside the patient table container
@@ -24,9 +24,9 @@ patientTableContainer.addEventListener('click', async (e) => await handleDeleteR
 
 async function __Visits__(contentContainer) {
     contentContainer.replaceChildren();
-    contentContainer.append(registrationFormContainer, patientTableContainer);
     // displayRegistrationCard();
-    __registrationForm__(registrationFormContainer);
+    __registrationForm__(contentContainer);
+    contentContainer.append(patientTableContainer);
     await displayTodayPatient();
 };
 
@@ -39,8 +39,8 @@ async function __Visits__(contentContainer) {
 
 async function displayTodayPatient() {
 
-    if (cachedData == null || tableJustUpdated) {
-        if (!tableJustUpdated) { patientTableContainer.innerHTML = "<h2>Loding...</h2>"; };
+    if (cachedData == null || state.tableJustUpdated) {
+        if (!state.tableJustUpdated) { patientTableContainer.innerHTML = "<h2>Loding...</h2>"; };
         const { data: freshData, error } = await supabase.from('patients').select();
 
         if (error) {
@@ -55,7 +55,7 @@ async function displayTodayPatient() {
         }
 
         cachedData = freshData;
-        tableJustUpdated = false;
+        state.tableJustUpdated = false;
     }
 
 
@@ -79,7 +79,7 @@ async function displayTodayPatient() {
 //         if (error) {
 //             alert(error.message);
 //         } else {
-//             tableJustUpdated = true;
+//             state.tableJustUpdated = true;
 //             await displayTodayPatient();
 //         }
 //     }
@@ -121,7 +121,7 @@ async function deletePatient(patientId) {
     }
 
     // 2. Force the table to fetch fresh data and re-render
-    tableJustUpdated = true;
+    state.tableJustUpdated = true;
     await displayTodayPatient();
 }
 

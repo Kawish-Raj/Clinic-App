@@ -13,8 +13,13 @@ const VALIDATION_FIELDS = ["age", "mobile_number"];
 
 const PATIENT_TABLE_HEADINGS = ["Case No", "First Name", "Last Name", "Mobile Number", "Age", "Address", "Husband/Father"];
 
+let state = {
+    tableJustUpdated: false,
+}
+
 export {UNIQUE_IDENTIFIER,
         PATIENT_FIELDS,
         VALIDATION_FIELDS,
-        PATIENT_TABLE_HEADINGS
+        PATIENT_TABLE_HEADINGS,
+        state
     };

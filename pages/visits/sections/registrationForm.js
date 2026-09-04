@@ -1,19 +1,20 @@
 import FORM_COMP from "../../../components/registrationCard";
 import { supabase } from "../../../database_helpers/supabase";
-import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, VALIDATION_FIELDS } from "../../../database_helpers/patients_table";
+import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, VALIDATION_FIELDS, state } from "../helpers";
 
-const template = document.createElement('template');
-template.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration", UNIQUE_IDENTIFIER).trim();
+const registrationFormContainer = document.createElement("div");
+registrationFormContainer.id = "registration-card-container";
+registrationFormContainer.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration", UNIQUE_IDENTIFIER).trim();
 
 // 1. Get direct reference to the form in memory
-const registrationForm = template.content.firstElementChild;
+// const registrationForm = template.content.firstElementChild;
 
 // 2. Attach submit handler directly to the element instance
-registrationForm.addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
+registrationFormContainer.addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
 
-export default function __registrationForm__(registrationFormContainer){
+export default function __registrationForm__(contentContainer){
     // 3. Move the exact form object into the container (preserves event listeners)
-    registrationFormContainer.replaceChildren(registrationForm);
+    contentContainer.append(registrationFormContainer);
 }
 
 async function handleLoginFormSubmission(e){
@@ -34,6 +35,8 @@ async function handleLoginFormSubmission(e){
         const { error } = await supabase.from('patients').insert(payload);
         if (error) {
             alert(error.message);
+        }else{
+            state.tableJustUpdated = true;
         }
     }
 }

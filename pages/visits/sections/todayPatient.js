@@ -14,7 +14,7 @@ export default async function __todayPatient__(contentContainer){
     await renderPaitientTable();
 }   
 
-async function renderPaitientTable(){
+export async function renderPaitientTable(){
     if (cachedData == null || state.tableJustUpdated) {
             if (!state.tableJustUpdated) { patientTableContainer.innerHTML = "<h2>Loding...</h2>"; };
             const { data: freshData, error } = await supabase.from('patients').select();

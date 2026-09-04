@@ -1,6 +1,7 @@
 import FORM_COMP from "../../../components/registrationCard";
 import { supabase } from "../../../database_helpers/supabase";
 import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, VALIDATION_FIELDS, state } from "../helpers";
+import { renderPaitientTable } from "./todayPatient";
 
 const registrationFormContainer = document.createElement("div");
 registrationFormContainer.id = "registration-card-container";
@@ -37,6 +38,7 @@ async function handleLoginFormSubmission(e){
             alert(error.message);
         }else{
             state.tableJustUpdated = true;
+            await renderPaitientTable();
         }
     }
 }

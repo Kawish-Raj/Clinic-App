@@ -1,4 +1,4 @@
-import {supabase} from "../components/supabase";
+import { supabase } from "../database_helpers/supabase";
 import { __Visits__ } from "../pages/visits/visits";
 
 const contentContainer = document.querySelector("#app-content");

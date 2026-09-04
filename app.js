@@ -1,4 +1,4 @@
-import { supabase } from "./components/supabase";
+import { supabase } from './database_helpers/supabase';
 import './index.css';
 
 const login_form = document.querySelector("#login-form");

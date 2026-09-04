@@ -1,4 +1,4 @@
-import {supabase} from "./components/supabase";
+import { supabase } from "./database_helpers/supabase";
 import { __navBar__ } from "./sections/navbar";
 
 async function __Dashboard__(){

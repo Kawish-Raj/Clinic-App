@@ -1,18 +1,6 @@
 import FORM_COMP from "../../../components/registrationCard";
-import { supabase } from "../../../components/supabase";
-
-const UNIQUE_IDENTIFIER = "case_no";
-const PATIENT_FIELDS = [
-    { id: UNIQUE_IDENTIFIER},
-    { id: "first_name", label: "First Name", type: "text", required: true },
-    { id: "last_name", label: "Last Name", type: "text", required: true },
-    { id: "mobile_number", label: "Mobile Number", type: "number", required: true, errorMsg: "Invalid Mobile Number" },
-    { id: "age", label: "Age", type: "number", required: true, errorMsg: "Invalid Age" },
-    { id: "address", label: "Address", type: "text", required: true },
-    { id: "husband_father", label: "Husband/Father", type: "text", required: true }
-];
-const VALIDATION_FIELDS = ["age", "mobile_number"];
-
+import { supabase } from "../../../database_helpers/supabase";
+import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, VALIDATION_FIELDS } from "../../../database_helpers/patients_table";
 
 const template = document.createElement('template');
 template.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration", UNIQUE_IDENTIFIER).trim();

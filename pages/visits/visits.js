@@ -1,19 +1,8 @@
-import { supabase } from "../../components/supabase";
+import { supabase } from "../../database_helpers/supabase";
 import { TABLE_COMP } from "../../components/table";
 // import  FORM_COMP  from "../../components/registrationCard";
 import __registrationForm__ from "./sections/registrationForm";
-
-const PATIENT_TABLE_HEADINGS = ["Case No", "First Name", "Last Name", "Mobile Number", "Age", "Address", "Husband/Father"];
-const UNIQUE_IDENTIFIER = "case_no";
-const PATIENT_FIELDS = [
-    { id: UNIQUE_IDENTIFIER},
-    { id: "first_name", label: "First Name", type: "text", required: true },
-    { id: "last_name", label: "Last Name", type: "text", required: true },
-    { id: "mobile_number", label: "Mobile Number", type: "number", required: true, errorMsg: "Invalid Mobile Number" },
-    { id: "age", label: "Age", type: "number", required: true, errorMsg: "Invalid Age" },
-    { id: "address", label: "Address", type: "text", required: true },
-    { id: "husband_father", label: "Husband/Father", type: "text", required: true }
-];
+import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, PATIENT_TABLE_HEADINGS } from "../../database_helpers/patients_table";
 // const VALIDATION_FIELDS = ["age", "mobile_number"];
 
 const registrationFormContainer = document.createElement("div");
@@ -167,5 +156,5 @@ async function deletePatient(patientId) {
 //     return validationStatus;
 // }
 
-export { __Visits__, UNIQUE_IDENTIFIER };
+export { __Visits__};
 

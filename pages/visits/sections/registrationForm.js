@@ -1,6 +1,6 @@
-import FORM_COMP from "../../../components/registrationCard";
+import FORM_COMP from "../../../components/form";
 import { supabase } from "../../../database_helpers/supabase";
-import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, VALIDATION_FIELDS, state } from "../helpers";
+import { TABLE_NAME,UNIQUE_IDENTIFIER, PATIENT_FIELDS, VALIDATION_FIELDS, state } from "../helpers";
 import { renderPaitientTable } from "./todayPatient";
 
 const registrationFormContainer = document.createElement("div");
@@ -8,6 +8,9 @@ registrationFormContainer.id = "registration-card-container";
 registrationFormContainer.innerHTML = FORM_COMP(PATIENT_FIELDS, "registration", UNIQUE_IDENTIFIER).trim();
 
 registrationFormContainer.addEventListener('submit', async (e) => await handleLoginFormSubmission(e));
+registrationFormContainer.querySelectorAll('input').forEach(element=>{
+    element.addEventListener('input',async (e)=> await handleFieldSearch(e));
+})
 
 export default function __registrationForm__(contentContainer){
     // 3. Move the exact form object into the container (preserves event listeners)
@@ -29,7 +32,7 @@ async function handleLoginFormSubmission(e){
         });
         
         console.log(payload);
-        const { error } = await supabase.from('patients').insert(payload);
+        const { error } = await supabase.from(TABLE_NAME).insert(payload);
         if (error) {
             alert(error.message);
         }else{
@@ -68,4 +71,27 @@ function validateRegistration(registrationForm){
     }
 
     return validationStatus;
+}
+
+
+async function handleFieldSearch(e){
+    let text = e.target.value;
+    if(text.length%3 == 0 && !(text.length == 0)){
+        const {data,error} = await supabase
+            .from(TABLE_NAME)
+            .select()
+            .like(e.target.id,`${e.target.value}%`)
+
+        if(error){
+            alert(error.message);
+        }else{
+            if(data.length == 0){
+                console.log("Sorry no previous entry found");
+            }else{
+                console.log(data);
+            }
+        } 
+    }else if(text.length == 0){
+        console.log('clear up');
+    }
 }

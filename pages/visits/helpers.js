@@ -1,3 +1,5 @@
+const TABLE_NAME = "patients"
+
 const UNIQUE_IDENTIFIER = "case_no";
 
 const PATIENT_FIELDS = [
@@ -17,7 +19,8 @@ let state = {
     tableJustUpdated: false,
 }
 
-export {UNIQUE_IDENTIFIER,
+export {TABLE_NAME,
+        UNIQUE_IDENTIFIER,
         PATIENT_FIELDS,
         VALIDATION_FIELDS,
         PATIENT_TABLE_HEADINGS,

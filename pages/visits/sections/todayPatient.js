@@ -1,5 +1,5 @@
 import { supabase } from "../../../database_helpers/supabase";
-import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, PATIENT_TABLE_HEADINGS,state } from "../helpers";
+import { UNIQUE_IDENTIFIER, PATIENT_FIELDS, PATIENT_TABLE_HEADINGS,state, TABLE_NAME } from "../helpers";
 import { TABLE_COMP } from "../../../components/table";
 
 let cachedData = null;
@@ -17,7 +17,7 @@ export default async function __todayPatient__(contentContainer){
 export async function renderPaitientTable(){
     if (cachedData == null || state.tableJustUpdated) {
             if (!state.tableJustUpdated) { patientTableContainer.innerHTML = "<h2>Loding...</h2>"; };
-            const { data: freshData, error } = await supabase.from('patients').select();
+            const { data: freshData, error } = await supabase.from(TABLE_NAME).select();
     
             if (error) {
                 console.log(error);
@@ -62,7 +62,7 @@ async function handleDeleteRow(e){
 async function deletePatient(patientId) {
     // 1. Delete from Supabase (assuming 'case_no' is your primary key column)
     const { error } = await supabase
-        .from('patients')
+        .from(TABLE_NAME)
         .delete()
         .eq('case_no', patientId);
 

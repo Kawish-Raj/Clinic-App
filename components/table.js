@@ -1,12 +1,13 @@
-export function TABLE_COMP(tableData,headings,fields,addDeleteButton=false,uniqueIdentifier=null){
+export function TABLE_COMP(tableData,fields,headings=null,addDeleteButton=false,uniqueIdentifier=null){
     return (
         `<table>
 
-            <tr>
+            ${headings?`<tr>
                 ${headings.map((h)=>{
                     return(`<th>${h}</th>`);
                 }).join('')}
-            </tr>
+            </tr>`:""}
+            
 
 
 

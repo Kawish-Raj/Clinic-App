@@ -34,7 +34,7 @@ export async function renderPaitientTable(){
             state.tableJustUpdated = false;
         }
     
-    patientTableContainer.innerHTML = TABLE_COMP(cachedData, PATIENT_TABLE_HEADINGS, PATIENT_FIELDS, true, UNIQUE_IDENTIFIER);
+    patientTableContainer.innerHTML = TABLE_COMP(cachedData,  PATIENT_FIELDS,PATIENT_TABLE_HEADINGS, true, UNIQUE_IDENTIFIER);
 }
 
 async function handleDeleteRow(e){

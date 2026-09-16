@@ -18,7 +18,9 @@ export async function renderPaitientTable(){
     if (cachedData == null || state.tableJustUpdated) {
             if (!state.tableJustUpdated) { patientTableContainer.innerHTML = "<h2>Loding...</h2>"; };
             const { data: freshData, error } = await supabase.from(TABLE_NAME).select();
-    
+            const visitsData = await supabase.from('visits').select();
+            console.log(visitsData);
+
             if (error) {
                 console.log(error);
                 patientTableContainer.innerHTML = "<p>Error loading data.</p>";

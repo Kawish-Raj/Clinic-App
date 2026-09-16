@@ -59,7 +59,7 @@ function validateRegistration(registrationForm){
     const ageErrorMessage = registrationForm.querySelector('#' + VALIDATION_FIELDS[0] + '-error');
     const mobileErrorMessage = registrationForm.querySelector('#' + VALIDATION_FIELDS[1] + '-error');
 
-    if (age.value < 1 || age.value > 99 || age.value.length <= 3) {
+    if (age.value < 1 || age.value > 99 || age.value.length > 3) {
         ageErrorMessage.innerText = "Age needs to be between 0 and 100. Remove leading zeros if any present.";
         ageErrorMessage.style.display = "block";
         validationStatus = false;
